@@ -1,0 +1,8 @@
+trade_id,counterparty,asset,direction,quantity,strike,maturity_years,currency
+CMD-001,Northstar Metals,Copper,Buy,500,8500.0,1.0,USD
+CMD-002,Northstar Metals,Copper,Sell,300,8700.0,1.5,USD
+CMD-003,Meridian Energy,Brent,Buy,1200,78.0,0.75,USD
+CMD-004,Meridian Energy,Brent,Sell,700,82.0,1.25,USD
+FX-001,Alpine Bank,EURUSD,Buy,2000000,1.08,1.0,USD
+FX-002,Alpine Bank,EURUSD,Sell,1250000,1.1,2.0,USD
+FX-003,Harbor Trading,EURUSD,Buy,800000,1.07,0.5,USD
