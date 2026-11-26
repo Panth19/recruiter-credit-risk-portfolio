@@ -23,3 +23,11 @@ The Credit Risk Dashboard also includes an SEC-based BI reporting pack: import-r
 
 
 The Credit Risk Dashboard includes the native Power BI Desktop file at `03-credit-risk-dashboard/bi/Credit_Risk_Dashboard_PowerBI.pbix`, plus Tableau calculation and layout instructions.
+
+## BI project links
+
+- [Download the Power BI Desktop report (.pbix)](https://github.com/Panth19/recruiter-credit-risk-portfolio/blob/main/03-credit-risk-dashboard/bi/Credit_Risk_Dashboard_PowerBI.pbix) — opens in Power BI Desktop or can be imported into the Power BI service.
+- [View the Tableau build guide](https://github.com/Panth19/recruiter-credit-risk-portfolio/blob/main/03-credit-risk-dashboard/bi/TABLEAU.md) — calculated fields and dashboard layout for rebuilding the views in Tableau.
+- [Download the SEC company-year dataset](https://github.com/Panth19/recruiter-credit-risk-portfolio/blob/main/03-credit-risk-dashboard/bi/sec_company_year_credit_risk.csv).
+
+The Power BI file is a downloadable report, not a public Power BI Service report link. A native Tableau workbook is not included.
