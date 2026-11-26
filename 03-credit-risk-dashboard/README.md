@@ -18,5 +18,5 @@ Source: [SEC EDGAR company facts API](https://www.sec.gov/search-filings/edgar-a
 
 ## BI reporting pack
 
-The i/ folder contains a 96-row SEC-based company-year CSV, data dictionary, Power BI DAX measures and page plan, and Tableau calculated fields and dashboard plan. The Streamlit app includes a CSV download for importing into either BI tool. These are build-ready definitions; no native .pbix or .twb/.twbx workbook is included. See i/README.md for interpretation limits.
+The `bi/ folder contains a 96-row SEC-based company-year CSV, data dictionary, Power BI DAX measures and page plan, and Tableau calculated fields and dashboard plan. The Streamlit app includes a CSV download for importing into either BI tool. These are build-ready definitions; no native .pbix or .twb/.twbx workbook is included. See `bi/README.md for interpretation limits.
 
