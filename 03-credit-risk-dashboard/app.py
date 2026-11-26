@@ -1,0 +1,13 @@
+import streamlit as st
+import pandas as pd
+from pathlib import Path
+APP_DIR = Path(__file__).resolve().parent
+st.set_page_config(page_title='Credit Risk Dashboard',layout='wide'); st.title('Corporate Credit Risk Dashboard'); st.caption('Real SEC EDGAR company fundamentals | receivables shown as a disclosed scale proxy')
+d=pd.read_csv(APP_DIR / "data" / "annual_fundamentals.csv"); d['receivables']=pd.to_numeric(d.receivables,errors='coerce'); d['exposure_proxy']=d.receivables
+d['sector']=d.company.map({'Apple Inc.':'Technology','MICROSOFT CORP':'Technology','AMAZON.COM, INC.':'Consumer / Technology','Walmart Inc.':'Consumer staples','COCA COLA CO':'Consumer staples','Exxon Mobil Corporation':'Energy','CATERPILLAR INC':'Industrials','THE BOEING COMPANY':'Industrials','FedEx Corporation':'Industrials','Ford Motor Co':'Automotive','GENERAL MOTORS COMPANY':'Automotive','Intel Corporation':'Technology'})
+d['z_double_prime']=.717*(d.current_assets-d.current_liabilities)/d.assets+.847*d.retained_earnings/d.assets+3.107*d.ebit/d.assets+.420*d.equity/d.total_liabilities+.998*d.revenue/d.assets
+d['risk_band']=pd.cut(d.z_double_prime,[-float('inf'),1.23,2.90,float('inf')],labels=['Higher risk proxy','Watch proxy','Lower risk proxy'])
+years=sorted(d.year.dropna().unique()); y=st.selectbox('Fiscal year',years,index=len(years)-1); x=d[(d.year==y)&d.exposure_proxy.notna()].copy(); sector=st.multiselect('Sector',sorted(x.sector.dropna().unique()),default=sorted(x.sector.dropna().unique())); x=x[x.sector.isin(sector)]
+a,b,c=st.columns(3); a.metric('Companies with receivables',len(x)); b.metric('Aggregate receivables proxy',f"${x.exposure_proxy.sum()/1e9:,.1f}B"); c.metric('Largest share',f"{x.exposure_proxy.max()/x.exposure_proxy.sum():.1%}" if x.exposure_proxy.sum() else 'n/a')
+st.subheader('Receivables proxy by company'); st.bar_chart(x.set_index('company').exposure_proxy.sort_values(ascending=False)); st.subheader('Concentration by sector'); sec=x.groupby('sector',observed=True).exposure_proxy.sum().sort_values(ascending=False).to_frame('Receivables proxy USD'); sec['share']=sec.iloc[:,0]/sec.iloc[:,0].sum(); st.dataframe(sec,use_container_width=True); st.subheader('Company view'); st.dataframe(x[['company','sector','year','receivables','z_double_prime','risk_band','assets','total_liabilities']],use_container_width=True)
+st.info('Public company filings do not disclose your firm bilateral counterparty exposures or internal credit limits. Accounts receivable is the filer own balance and is only a scale proxy, not exposure to your portfolio. Sector labels are manually mapped. Risk bands are formula proxies, not agency ratings.')
